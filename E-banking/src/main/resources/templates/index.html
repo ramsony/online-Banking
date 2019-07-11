@@ -2,44 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="common/header ::common-header"/>
 <!-- Login Section -->
-<body>
-	<div class="container col-md-2 mb-3">
-        <div class="row ">
-            <div class="main-center ">
-                <div class="bg-danger" th:if="${param.error}">
-                    Invalid username and secret.
-                </div>
-                <div class="bg-danger" th:if="${param.logout}">
-                    You have been logged out.
-                </div>
-                <form class="form-signin" th:action="@{/index}" method="post">
-                    <h2 class="form-signin-heading">Please sign in</h2>
-                    <div class="form-group">
-                        <label for="username" class="sr-only">Username</label>
-                        <input type="text" roleId="username" class="form-control" placeholder="Username" name="username"
-                               id="username"
-                               required="required" autofocus="autofocus"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="sr-only">Password</label>
-                        <input type="password" roleId="inputPassword" class="form-control" placeholder="Password"
-                               id="password"
-                               name="password" required="required"/>
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" name="remember-me" id="remember-me"/> &nbsp; Remember me
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                </form>
-                
-                <hr />
-                
-                <div class="form-group ">
-                    <a type="submit" class="btn btn-info btn-lg btn-block login-button" th:href="@{/signup}">Sign up!</a>
-                </div>
+<body class="content">
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-12 col-sm-6 col-md-3">
+			<div class="form-container">
+			<div class="bg-danger" th:if="${param.error}">
+               Invalid username and secret.
             </div>
-        </div>
-    </div>
-    <div th:replace="common/header :: body-bottom-scripts"/>
+            <div class="bg-danger" th:if="${param.logout}">
+               You have been logged out.
+            </div>
+			<h3>Please sign in</h3>	
+			<form class="form-signin" th:action="@{/index}" method="post">
+  				<div class="form-group">
+                    <label for="username" class="sr-only">Username</label>
+                    <input type="text" roleId="username" class="form-control" placeholder="Username" name="username"id="username"required="required" autofocus="autofocus"/>
+                </div>
+
+  				<div class="form-group">
+   		 			<label for="password" class="sr-only">Password</label>
+   					<input type="password" roleId="inputPassword" class="form-control" placeholder="Password" id="password" name="password" required="required"/>
+  				</div>
+
+  				<div class="form-group form-check">
+    				<input type="checkbox" class="form-check-input" id="remember-me">
+    				<label class="form-check-label" for="exampleCheck1">Remember me</label>
+  				</div>
+
+  				<button type="submit" class="btn btn-primary btn-block">Sign in
+  				</button>
+  				<hr>
+  				<button type="submit" class="btn btn-info btn-block" th:href="@{/signup}">Sign up!
+  				</button>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:replace="common/header :: body-bottom-scripts"/>
 </body>
 </html>

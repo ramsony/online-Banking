@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header ::common-header"/>
+<!-- Login Section -->
+<body class="content">
+<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-12 col-sm-6 col-md-3">
+			<div class="form-container">
+			<h3>Sign Up</h3>	
+			<form class="form-signin" th:action="@{/signup}" method="post">
+  				<div class="form-group">
+                    <label for="firstName" class="control-label">First Name</label>
+                    <input type="text" roleId="firstname" class="form-control" th:value="${user.firstName}" placeholder="Enter your first name" name="firstName" id="firstName"required="required" autofocus="autofocus"/>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" class="control-label">Last Name</label>
+                    <input type="text" roleId="lastname" class="form-control" th:value="${user.lastName}" placeholder="Enter your last name" name="lastName" id="lastName"required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="phone" class="control-label">Phone</label>
+                    <input type="text" roleId="phone" class="form-control" th:value="${user.phone}" placeholder="xxx-xxx-xxxx" name="phone" id="phone" required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="control-label">Your Email</label>
+                    <span class="bg-danger pull-right" th:if="${emailExists}">Email already exists</span>
+                    <input type="text" roleId="email" class="form-control" th:value="${user.email}" placeholder="Enter your email" name="email" id="email"required="required"/>
+                </div>
+                <div class="form-group">
+                    <label for="username" class="control-label">Username</label>
+                    <span class="bg-danger pull-right" th:if="${usernameExists}">Username already exists</span>
+                    <input type="text" roleId="username" class="form-control" th:value="${user.username}" placeholder="Enter your Username" name="username" id="username" required="required"/>
+                </div>
+                
+
+  				<div class="form-group">
+   		 			<label for="password" class="sr-only">Password</label>
+   					<input type="password" roleId="password" class="form-control" th:value="${user.password}" placeholder="Enter your Password" id="password" name="password" required="required"/>
+  				</div>
+
+  				<div class="form-group form-check">
+    				<input type="checkbox" class="form-check-input" id="remember-me">
+    				<label class="form-check-label" for="exampleCheck1">Show Password</label>
+  				</div>
+
+  				<button type="submit" class="btn btn-primary btn-block">Sign up!
+  				</button>
+  				<hr>
+  				<a class="btn btn-info btn-block" th:href="@{/signup}">Cancel
+  				</a>
+			</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:replace="common/header :: body-bottom-scripts"/>
+</body>
+</html>
