@@ -23,12 +23,12 @@
                 </div>
                 <div class="form-group">
                     <label for="email" class="control-label">Your Email</label>
-                    <span class="bg-danger pull-right" th:if="${emailExists}">Email already exists</span>
+                    <span class="bg-warning pull-right" th:if="${emailExists}">Email already exists</span>
                     <input type="text" roleId="email" class="form-control" th:value="${user.email}" placeholder="Enter your email" name="email" id="email"required="required"/>
                 </div>
                 <div class="form-group">
                     <label for="username" class="control-label">Username</label>
-                    <span class="bg-danger pull-right" th:if="${usernameExists}">Username already exists</span>
+                    <span class="bg-warning pull-right" th:if="${usernameExists}">Username already exists</span>
                     <input type="text" roleId="username" class="form-control" th:value="${user.username}" placeholder="Enter your Username" name="username" id="username" required="required"/>
                 </div>
                 
