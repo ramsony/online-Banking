@@ -53,7 +53,7 @@ public class HomeController {
 			
 			return "signup";
 		}else {
-			userService.save(user);
+			userService.create(user);
 //			Set<UserRole> userRoles = new HashSet<>();
 //			userRoles.add(new UserRole(user,roleDao.findByname("USER")))model;
 //			userService.createUser(user,userRoles);
