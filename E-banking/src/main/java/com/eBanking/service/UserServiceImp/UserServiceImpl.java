@@ -13,6 +13,7 @@ import com.eBanking.Dao.RoleDao;
 import com.eBanking.Dao.UserDao;
 import com.eBanking.entity.User;
 import com.eBanking.entity.security.UserRole;
+import com.eBanking.service.AccountService;
 import com.eBanking.service.UserService;
 
 @Service
@@ -26,14 +27,17 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private RoleDao roleDao;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private AccountService accountService;
 
 	public void save(User user) {
 		userDao.save(user);
 	}
 	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-
 	public User findByUsername(String username) {
 		return userDao.findByUsername(username);
 	}

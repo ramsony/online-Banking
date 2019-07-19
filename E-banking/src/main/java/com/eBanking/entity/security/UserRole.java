@@ -15,7 +15,7 @@ import com.eBanking.entity.User;
 @Table(name="user_role")
 public class UserRole {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userRoleId;
 
     public UserRole(User user, Role role) {
