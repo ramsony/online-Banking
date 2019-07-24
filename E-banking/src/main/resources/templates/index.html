@@ -7,10 +7,10 @@
 	<div class="row justify-content-center">
 		<div class="col-12 col-sm-6 col-md-3">
 			<div class="form-container">
-			<div class="bg-danger" th:if="${param.error}">
+			<div class="alert alert-danger" role="alert" th:if="${param.error}">
                Invalid username and secret.
             </div>
-            <div class="bg-danger" th:if="${param.logout}">
+            <div class="alert alert-danger" role="alert" th:if="${param.logout}">
                You have been logged out.
             </div>
 			<h3>Please sign in</h3>	
