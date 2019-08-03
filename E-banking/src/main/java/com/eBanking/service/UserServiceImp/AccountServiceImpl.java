@@ -15,6 +15,7 @@ import com.eBanking.entity.SavingsAccount;
 import com.eBanking.entity.SavingsTransaction;
 import com.eBanking.entity.User;
 import com.eBanking.service.AccountService;
+import com.eBanking.service.TransactionService;
 import com.eBanking.service.UserService;
 
 @Service
@@ -31,9 +32,9 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private UserService userService;
 
-	/*
-	 * @Autowired private TransactionService transactionService;
-	 */
+	@Autowired 
+	private TransactionService transactionService;
+	 
 
 	public PrimaryAccount createPrimaryAccount() {
 		PrimaryAccount primaryAccount = new PrimaryAccount();
@@ -67,7 +68,7 @@ public class AccountServiceImpl implements AccountService {
 
 			PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Deposit to Primary Account",
 					"Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
-//			transactionService.savePrimaryDepositTransaction(primaryTransaction);
+			transactionService.savePrimaryDepositTransaction(primaryTransaction);
 
 		} else if (accountType.equalsIgnoreCase("Savings")) {
 			SavingsAccount savingsAccount = user.getSavingsAccount();
@@ -77,38 +78,35 @@ public class AccountServiceImpl implements AccountService {
 			Date date = new Date();
 			SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Deposit to savings Account",
 					"Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-//			transactionService.saveSavingsDepositTransaction(savingsTransaction);
+			transactionService.saveSavingsDepositTransaction(savingsTransaction);
 		}
 	}
 
-	/*
-	 * public void withdraw(String accountType, double amount, Principal principal)
-	 * { User user = userService.findByUsername(principal.getName());
-	 * 
-	 * if (accountType.equalsIgnoreCase("Primary")) { PrimaryAccount primaryAccount
-	 * = user.getPrimaryAccount();
-	 * primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(
-	 * new BigDecimal(amount))); primaryAccountDao.save(primaryAccount);
-	 * 
-	 * Date date = new Date();
-	 * 
-	 * PrimaryTransaction primaryTransaction = new PrimaryTransaction(date,
-	 * "Withdraw from Primary Account", "Account", "Finished", amount,
-	 * primaryAccount.getAccountBalance(), primaryAccount);
-	 * transactionService.savePrimaryWithdrawTransaction(primaryTransaction); } else
-	 * if (accountType.equalsIgnoreCase("Savings")) { SavingsAccount savingsAccount
-	 * = user.getSavingsAccount();
-	 * savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(
-	 * new BigDecimal(amount))); savingsAccountDao.save(savingsAccount);
-	 * 
-	 * Date date = new Date(); SavingsTransaction savingsTransaction = new
-	 * SavingsTransaction(date, "Withdraw from savings Account", "Account",
-	 * "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
-	 * transactionService.saveSavingsWithdrawTransaction(savingsTransaction); }
-	 * 
-	 * }
-	 */
+	public void withdraw(String accountType, double amount, Principal principal) {
+		User user = userService.findByUsername(principal.getName());
 
+		if (accountType.equalsIgnoreCase("Primary")) {
+			PrimaryAccount primaryAccount = user.getPrimaryAccount();
+			primaryAccount.setAccountBalance(primaryAccount.getAccountBalance().subtract(new BigDecimal(amount)));
+			primaryAccountDao.save(primaryAccount);
+
+			Date date = new Date();
+
+			PrimaryTransaction primaryTransaction = new PrimaryTransaction(date, "Withdraw from Primary Account",
+					"Account", "Finished", amount, primaryAccount.getAccountBalance(), primaryAccount);
+//	  transactionService.savePrimaryWithdrawTransaction(primaryTransaction); 
+			} else if (accountType.equalsIgnoreCase("Savings")) {
+				SavingsAccount savingsAccount = user.getSavingsAccount();
+				savingsAccount.setAccountBalance(savingsAccount.getAccountBalance().subtract(new BigDecimal(amount)));
+				savingsAccountDao.save(savingsAccount);
+
+				Date date = new Date();
+				SavingsTransaction savingsTransaction = new SavingsTransaction(date, "Withdraw from savings Account",
+						"Account", "Finished", amount, savingsAccount.getAccountBalance(), savingsAccount);
+//	  transactionService.saveSavingsWithdrawTransaction(savingsTransaction); 
+			}
+		}
+	
 	private int accountGen() {
 		return ++nextAccountNumber;
 	}
